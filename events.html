@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Layout</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-image: url(background.jpg);
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: #33333300;
+            color: white;
+            padding: 1rem 0;
+            width: 100%;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            padding: 0 2vw;
+            /* Use viewport width for padding */
+        }
+
+        .navbar ul {
+            list-style-type: none;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex: 1;
+        }
+
+        .navbar li {
+            margin: 0 1vw;
+            /* Use viewport width for margin */
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* Logo Styles */
+        .menu-icon img {
+            width: 80px;
+            /* Adjust the width as needed */
+            height: auto;
+            transition: transform 0.3s ease;
+            position: fixed;
+        }
+
+        .menu-icon img:hover {
+            transform: scale(1.05);
+            /* Slightly enlarge on hover */
+        }
+
+        /* Sidebar Styles */
+        .container {
+            display: flex;
+            flex: 1;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            width: 200px;
+            background-color: #f4f4f400;
+            padding: 1rem;
+            position: fixed;
+            top: 100px;
+            /* Set a top value to push the sidebar below the header */
+            left: -200px;
+            height: calc(100% - 60px);
+            /* Adjust height to account for the header height */
+            transition: left 0.3s ease;
+            z-index: 1000;
+        }
+
+        .sidebar.active {
+            left: 0;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+        }
+
+        .sidebar li {
+            margin: 1rem 0;
+        }
+
+        .sidebar a {
+            text-decoration: none;
+            color: #ffffff;
+            display: block;
+            padding: 0.5rem;
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+
+        .sidebar a:hover {
+            background-color: #080000;
+        }
+
+        /* Event List Styles */
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 100px auto;
+        }
+
+        .container1 {
+            padding: 10px 50px;
+            position: relative;
+            width: 50%;
+            animation: movedown 1s linear forwards;
+            opacity: 0;
+
+        }
+
+        @keyframes movedown {
+            0% {
+                opacity: 1;
+                transform: translateY(-30px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0px);
+            }
+        }
+
+        .container1:nth-child(2) {
+            animation-delay: 1s;
+        }
+
+        .container1:nth-child(3) {
+            animation-delay: 2s;
+        }
+
+        .container1:nth-child(4) {
+            animation-delay: 3s;
+        }
+
+        .container1:nth-child(5) {
+            animation-delay: 4s;
+        }
+
+        .container1:nth-child(6) {
+            animation-delay: 5s;
+        }
+
+        .text-box {
+            padding: 20px 30px;
+            background-color: #060606d1;
+            position: relative;
+            border-radius: 7px;
+            color: #e9dada;
+        }
+
+        .left-container {
+            left: 0;
+        }
+
+        .right-container {
+            left: 50%;
+        }
+
+        .container1 img {
+            position: absolute;
+            width: 40px;
+            border-radius: 50%;
+            right: -20px;
+            top: 32px;
+            z-index: 10;
+        }
+
+        .right-container img {
+            left: -20px;
+        }
+
+        .timeline::after {
+            content: " ";
+            position: absolute;
+            width: 6px;
+            height: 100%;
+            background-color: white;
+            top: 0;
+            left: 50%;
+            margin-left: -3px;
+            z-index: -1;
+            animation: moveline 6s linear forwards;
+        }
+
+        @keyframes moveline {
+            0% {
+                height: 0;
+            }
+
+            100% {
+                height: 100%;
+            }
+        }
+
+        .text-box h2 {
+            font-weight: 600;
+        }
+
+        .text-box small {
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .left-container-arrow {
+            height: 0;
+            width: 0;
+            position: absolute;
+            top: 28px;
+            z-index: 1;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            border-left: 15px solid #fff;
+            right: -15px;
+        }
+
+        .right-container-arrow {
+            height: 0;
+            width: 0;
+            position: absolute;
+            top: 28px;
+            z-index: 1;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            border-right: 15px solid #fff;
+            left: -15px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                left: -100%;
+                transition: left 0.3s ease;
+            }
+
+            .sidebar.active {
+                left: 0;
+            }
+
+            .timeline {
+                margin: 50px auto;
+            }
+
+            .timeline::after {
+                left: 31px;
+            }
+
+            .container {
+                width: 100%;
+                padding-left: 80px;
+                padding-right: 25px;
+            }
+
+            .text-box {
+                font-size: 13px;
+            }
+
+            .text-box small {
+                margin-bottom: 10px;
+            }
+
+            .right-container {
+                left: 0;
+            }
+
+            .left-container img,
+            .right-container img {
+                left: 10px;
+            }
+
+            .left-container-arrow,
+            .right-container-arrow {
+                border-right: 15px solid #fff;
+                border-left: 0;
+                left: -15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="navbar">
+            <div class="menu-icon" id="menu-icon">
+                <img src="logo.png" alt="Logo">
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <aside class="sidebar" id="sidebar">
+            <ul>
+                <li><a href="./home.html"">Home</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="./events.html">Events</a></li>
+                <li><a href="#">Trending</a></li>
+                <li><a href="#">Upcoming</a></li>
+            </ul>
+        </aside>
+
+    </div>
+
+    <div class="timeline">
+        <div class="container1 left-container">
+            <img src="gfg.png" alt="">
+            <div class="text-box">
+                <h2>GeeksforGeeks: Geeks Coding Challenge (GCC)</h2>
+                <small>September 5, 2024</small>
+                <p>The GeeksforGeeks Coding Challenge (GCC) is a popular programming competition, aimed at testing coding skills and problem-solving abilities. The challenge covers a wide array of domains like data structures, algorithms, and system design.</p>
+                <span class="left-container-arrow"></span>
+            </div>
+        </div>
+
+        <div class="container1 right-container">
+            <img src="lc.jpeg   " alt="">
+            <div class="text-box">
+                <h2>LeetCode: LeetCode Weekly Contest</h2>
+                <small>September 12, 2024</small>
+                <p>The LeetCode Weekly Contest is a highly competitive coding challenge. It typically features four programming problems that test participants' knowledge in algorithms, data structures, and optimization techniques.</p>
+                <span class="right-container-arrow"></span>
+            </div>
+        </div>
+
+        <div class="container1 left-container">
+            <img src="codeforce.png" alt="">
+            <div class="text-box">
+                <h2>Codeforces: Codeforces Global Round</h2>
+                <small>September 19, 2024</small>
+                <p>The Codeforces Global Round attracts the best coders from around the world. This intense competition challenges participants with algorithmic problems, pushing their problem-solving capabilities to the limit.</p>
+                <span class="left-container-arrow"></span>
+            </div>
+        </div>
+
+        <div class="container1 right-container">
+            <img src="chut.png" alt="">
+            <div class="text-box">
+                <h2>Cultural Fest (Algorythm)</h2>
+                <small>March 25, 2024</small>
+                <p>Algorythm is Chitkara University’s annual cultural fest, filled with dance, music, drama, and art performances. The event is managed by the Cultural Committee, offering a mix of traditional and modern activities for students to enjoy.</p>
+                <span class="right-container-arrow"></span>
+            </div>
+        </div>
+
+        <div class="container1 left-container">
+            <img src="tedx.png" alt="">
+            <div class="text-box">
+                <h2>Youth Conclave</h2>
+                <small>April 10, 2024</small>
+                <p>The Youth Conclave gathers students to debate social and cultural issues, fostering leadership and awareness among young minds. Organized by the Literary Committee, the event features intellectual exchanges and guest speakers.</p>
+                <span class="left-container-arrow"></span>
+            </div>
+        </div>
+
+        <div class="container1 right-container">
+            <img src="rb.png" alt="">
+            <div class="text-box">
+                <h2>Talent Hunt</h2>
+                <small>May 15, 2024</small>
+                <p>The Talent Hunt is a university-wide event that offers students a platform to showcase their artistic talents, including singing, acting, and painting. The event is organized by the Fine Arts and Performing Arts Committee.</p>
+                <span class="right-container-arrow"></span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('menu-icon').addEventListener('click', function() {
+            var sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('active');
+        });
+    </script>
+
+</body>
+
+</html>

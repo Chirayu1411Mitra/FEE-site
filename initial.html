@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Student Pre-Registration Form</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://kit.fontawesome.com/db03bbf14e.js" crossorigin="anonymous"></script>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-image: url(background.jpg);
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: #33333300;
+            color: white;
+            padding: 1rem 0;
+            width: 100%;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            padding: 0 2vw;
+            /* Use viewport width for padding */
+        }
+
+        .navbar ul {
+            list-style-type: none;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex: 1;
+        }
+
+        .navbar li {
+            margin: 0 1vw;
+            /* Use viewport width for margin */
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* Logo Styles */
+        .menu-icon img {
+            width: 80px;
+            /* Adjust the width as needed */
+            height: auto;
+            transition: transform 0.3s ease;
+            position: fixed;
+        }
+
+        .menu-icon img:hover {
+            transform: scale(1.05);
+            /* Slightly enlarge on hover */
+        }
+
+        /* Sidebar Styles */
+        .container {
+            display: flex;
+            flex: 1;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            width: 200px;
+            background-color: #f4f4f400;
+            padding: 1rem;
+            position: fixed;
+            top: 100px;
+            /* Set a top value to push the sidebar below the header */
+            left: -200px;
+            height: calc(100% - 60px);
+            /* Adjust height to account for the header height */
+            transition: left 0.3s ease;
+        }
+
+        .sidebar.active {
+            left: 0;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+        }
+
+        .sidebar li {
+            margin: 1rem 0;
+        }
+
+        .sidebar a {
+            text-decoration: none;
+            color: #ffffff;
+            display: block;
+            padding: 0.5rem;
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+
+        .sidebar a:hover {
+            background-color: #080000;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                left: -100%;
+                transition: left 0.3s ease;
+            }
+
+            .sidebar.active {
+                left: 0;
+            }
+        }
+
+        /*form*/
+        .checkbox-co {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            align-items: center;
+            padding: 5px;
+        }
+
+        h1 {
+            text-align: center;
+            font-family: "Roboto Slab", serif;
+            color: rgb(255, 255, 255);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            margin: 0 auto;
+            width: 500px;
+            padding: 20px;
+            padding-right: 40px;
+            border: 1px solid #000000;
+            background-color: #f0f0f0;
+            /* Grey background color */
+            border-radius: 8px;
+            /* Optional: Rounded corners for the form */
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-family: "Ubuntu", sans-serif;
+        }
+
+        input[type="text"],
+        input[type="tel"],
+        input[type="email"],
+        input[type="file"],
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        input[type="checkbox"],
+        input[type="radio"] {
+            margin-right: 5px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 25px;
+            text-align: center;
+            text-decoration: none;
+            margin-top: 20px;
+            display: inline-block;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: "Ubuntu", sans-serif;
+            font-weight: 700;
+            font-style: normal;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 24px;
+            }
+
+            button {
+                padding: 12px 20px;
+                font-size: 14px;
+            }
+        }
+
+        #option {
+            display: flex;
+            align-items: center;
+        }
+
+        #options {
+            display: flex;
+        }
+
+        .dark-mode-toggle {
+            display: block;
+            text-align: center;
+            margin: 20px 0;
+            font-family: "Ubuntu", sans-serif;
+        }
+
+        #dark-mode-stylesheet {
+            body {
+                background-color: #121212;
+                color: #ffffff;
+                background-image: none;
+                /* Remove background image for dark mode */
+            }
+
+            form {
+                border: 1px solid #ffffff;
+            }
+
+            label {
+                color: #ffffff;
+            }
+
+            input[type="text"],
+            input[type="tel"],
+            input[type="email"],
+            input[type="file"],
+            select {
+                background-color: #333333;
+                color: #ffffff;
+                border: 1px solid #555555;
+            }
+
+            button {
+                background-color: #333333;
+                color: #ffffff;
+                border: 1px solid #555555;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="navbar">
+            <div class="menu-icon" id="menu-icon">
+                <img src="logo.png" alt="Logo">
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <aside class="sidebar" id="sidebar">
+            <ul>
+                <li><a href="./home.html">Home</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="./events.html">Events</a></li>
+                <li><a href="#">Trending</a></li>
+                <li><a href="#">Upcoming</a></li>
+            </ul>
+        </aside>
+
+    </div>
+    <div class="Footer">
+
+    </div>
+
+    <h1>Student Registration Form</h1>
+    <form id="registrationForm" onsubmit="event.preventDefault()">
+        <label for="first_name">First Name:</label>
+        <input type="text" id="first_name" name="first_name" class="fields" required>
+
+        <label for="last_name">Last Name:</label>
+        <input type="text" id="last_name" name="last_name" class="fields" required>
+
+        <label for="phone_number">Phone Number:</label>
+        <input type="tel" id="phone_number" name="phone_number" class="fields" required>
+
+        <label for="email">Email Address:</label>
+        <input type="email" id="email" name="email" class="fields" required>
+
+
+        <label for="city">City:</label>
+        <input type="text" id="city" name="city" class="fields" required>
+        <label for="State">College</label>
+        <select name="states" id="states" class="fields">
+            <option value="" selected disabled>Select your college</option>
+            <option value="">Chitkara University,Punjab</option>
+            <option value="">Chitkara University, Himachal</option>
+        </select>
+
+        <label>What programs are you interested in?</label>
+        <div id="option">
+            <input type="checkbox" id="BE" name="program" value="BE">
+            <label for="BE">Technical</label><br>
+        </div>
+        <div id="option">
+            <input type="checkbox" id="BDES" name="program" value="BDES">
+            <label for="BDES">Fun activity</label><br>
+        </div>
+        <div id="option">
+            <input type="checkbox" id="BBA" name="program" value="BBA">
+            <label for="BBA">Cultural</label><br>
+        </div>
+        <div id="option">
+            <input type="checkbox" id="BA_CA" name="program" value="BA_CA">
+            <label for="BA_CA">Extra-Curricular</label><br>
+        </div>
+
+        <button type="button" id="nextButton">NEXT</button>
+    </form>
+
+    <script>
+        document.getElementById('nextButton').addEventListener('click', function (event) {
+            const phoneNumber = document.getElementById('phone_number').value;
+            const phoneNumberPattern = /^\d{10}$/;
+            if (!phoneNumberPattern.test(phoneNumber)) {
+                alert('Please enter a valid 10-digit phone number.');
+                return;
+            }
+
+            const allFields = document.querySelectorAll(".fields");
+            for (let field of allFields) {
+                if (field.value.trim() === '') {
+                    field.focus();
+                    alert('Please fill out all fields.');
+                    return;
+                }
+            }
+
+            const selectedProgram = document.querySelector('input[name="program"]:checked');
+            if (selectedProgram) {
+                let url;
+                switch (selectedProgram.value) {
+                    case 'BE':
+                        url = 'BE.html';
+                        break;
+                    case 'BDES':
+                        url = 'BDES.html';
+                        break;
+                    case 'BBA':
+                        url = 'BBA.html';
+                        break;
+                    case 'BA_CA':
+                        url = 'BA_CA.html';
+                        break;
+                    default:
+                        alert('Please select a program.');
+                        return;
+                }
+                window.location.href = url;
+            } else {
+                alert('Please select a program.');
+            }
+        });
+
+        var allFields = document.querySelectorAll(".fields");
+        for (var i = 0; i < allFields.length; i++) {
+            allFields[i].addEventListener("keypress", function (event) {
+                if (event.key === 'Enter') {
+                    event.preventDefault();
+                    if (this.value.trim() === '') {
+                        alert('Please fill out this field.');
+                        this.focus();
+                    } else {
+                        const formElements = Array.from(document.querySelectorAll(".fields, input[type='radio'], select"));
+                        const currentIndex = formElements.indexOf(this);
+                        const nextElement = formElements[currentIndex + 1];
+                        if (nextElement) {
+                            nextElement.focus();
+                        }
+                    }
+                }
+            });
+        }
+        // Sidebar toggle
+        document.getElementById('menu-icon').addEventListener('click', function () {
+            document.getElementById('sidebar').classList.toggle('active');
+        });
+    </script>
+
+</body>
+
+</html>
