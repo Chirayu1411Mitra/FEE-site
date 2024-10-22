@@ -3,22 +3,21 @@ const slides = document.querySelectorAll('.slide');
 
 let slideIndex = 0;
 
-function showSlide(index) {
+function showCarouselSlide(index) {
   carousel.style.transform = `translateX(-${index * 100}%)`;
   slideIndex = index;
 }
 
 function nextSlide() {
-  showSlide((slideIndex + 1) % slides.length);
+  showCarouselSlide((slideIndex + 1) % slides.length);
 }
 
 function prevSlide() {
-  showSlide((slideIndex - 1 + slides.length) % slides.length);
+  showCarouselSlide((slideIndex - 1 + slides.length) % slides.length);
 }
 
 // Automatically cycle through slides (adjust the interval as needed)
 setInterval(nextSlide, 3000);
-
 
 document.addEventListener("DOMContentLoaded", function () {
   const observerOptions = {
@@ -42,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   observer.observe(pastEventsSection);
 });
-  
+
 function startCountdown() {
   const countdowns = document.querySelectorAll('.countdown');
 
@@ -72,27 +71,27 @@ function startCountdown() {
 
 // Slider Navigation Logic
 let currentSlide = 0;
-const slides1 = document.querySelectorAll('.event-slide');
-const totalSlides = slides.length;
+const eventSlides = document.querySelectorAll('.event-slide');
+const totalSlides = eventSlides.length;
 
-function showSlide(index) {
+function showEventSlide(index) {
   const slider = document.querySelector('.upcoming-slider');
-  const slideWidth = slides1[0].clientWidth;
+  const slideWidth = eventSlides[0].clientWidth;
   slider.style.transform = `translateX(${-index * slideWidth}px)`;
 }
 
 document.getElementById('left-arrow').addEventListener('click', () => {
   currentSlide = (currentSlide <= 0) ? totalSlides - 1 : currentSlide - 1;
-  showSlide(currentSlide);
+  showEventSlide(currentSlide);
 });
 
 document.getElementById('right-arrow').addEventListener('click', () => {
   currentSlide = (currentSlide >= totalSlides - 1) ? 0 : currentSlide + 1;
-  showSlide(currentSlide);
+  showEventSlide(currentSlide);
 });
 
 // Initialize countdown and slider on DOM load
 document.addEventListener('DOMContentLoaded', () => {
   startCountdown();
-  showSlide(currentSlide);
+  showEventSlide(currentSlide);
 });
