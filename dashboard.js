@@ -1,9 +1,9 @@
 document.addEventListener('DOMContentLoaded', function () {
     const jobs = [
-        { title: 'Customer Experience Designer', department: 'Design', location: 'Copenhagen, DK', applicants: 8 },
-        { title: 'Software Developer', department: 'Development', location: 'Copenhagen, DK', applicants: 3 },
-        { title: 'Customer Experience Designer', department: 'Design', location: 'Copenhagen, DK', applicants: 8 },
-        { title: 'Software Developer', department: 'Development', location: 'Copenhagen, DK', applicants: 3 }
+        { title: 'Hack India', department: 'Web 3', location: 'Einstein Block', applicants: 500 },
+        { title: 'Open Source', department: 'OS', location: 'Tesla Block', applicants: 100},
+        { title: 'Ai Unveiled', department: 'Ai', location: 'Exploretrium', applicants: 400},
+        { title: 'Game Development', department: 'Game Dev', location: 'Turing Block', applicants:300}
     ];
 
     const jobList = document.getElementById('job-list');
@@ -16,5 +16,5 @@ document.addEventListener('DOMContentLoaded', function () {
             <span>${job.applicants} applicants</span>
         `;
         jobList.appendChild(jobItem);
-    });
+   });
 });
