@@ -1,0 +1,675 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Subscription Page</title>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+
+    <style>
+        body {
+
+            background-color: transparent;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            min-height: 100vh;
+
+            margin: 0;
+
+            font-family: Arial, sans-serif;
+
+            background-image: url(file.png);
+
+            background-repeat: no-repeat;
+
+        }
+
+        .container {
+
+            background-color: rgba(255, 255, 255, 0.9);
+
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+            border-radius: 8px;
+
+            display: flex;
+
+            width: 80%;
+
+            animation: fadeIn 1s ease-in-out;
+
+        }
+
+        .left-section,
+
+        .right-section {
+
+            padding: 32px;
+
+        }
+
+        .left-section {
+
+            width: 60%;
+
+            background-color: rgba(243, 244, 246, 0.9);
+
+            border-top-left-radius: 8px;
+
+            border-bottom-left-radius: 8px;
+
+            animation: slideInLeft 1s ease-in-out;
+
+            display: flex;
+
+            flex-direction: column;
+
+        }
+
+        .right-section {
+
+            width: 40%;
+
+            background-color: rgba(255, 255, 255, 0.9);
+
+            border-top-right-radius: 8px;
+
+            border-bottom-right-radius: 8px;
+
+        }
+
+        .header {
+
+            display: flex;
+
+            align-items: center;
+
+            margin-bottom: 16px;
+
+        }
+
+        .header img {
+
+            width: 80px;
+
+            height: 80px;
+
+            margin-right: 8px;
+
+        }
+
+        .header .title {
+
+            font-size: 32px;
+
+            font-weight: 700;
+
+            color: #374151;
+
+        }
+
+        .plans-container {
+
+            margin-top: 16px;
+
+            flex-grow: 1;
+
+        }
+
+        .plan {
+
+            display: flex;
+
+            align-items: center;
+
+            margin-bottom: 24px;
+
+            animation: slideIn 0.5s ease-in-out;
+
+            transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s, color 0.3s;
+
+            padding: 16px;
+
+            background-color: white;
+
+            border-radius: 8px;
+
+            cursor: pointer;
+
+        }
+
+        .plan:hover {
+
+            transform: translateY(-5px);
+
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+        }
+
+        .plan img {
+
+            width: 60px;
+
+            height: 60px;
+
+            border-radius: 8px;
+
+            margin-right: 16px;
+
+        }
+
+        .plan-details {
+
+            flex-grow: 1;
+
+        }
+
+        .plan-title {
+
+            font-size: 20px;
+
+            font-weight: 600;
+
+            color: #1f2937;
+
+        }
+
+        .plan-description,
+
+        .plan-quantity {
+
+            color: #6b7280;
+
+            font-size: 16px;
+
+        }
+
+        .plan-price {
+
+            font-size: 20px;
+
+            font-weight: 600;
+
+            color: #1f2937;
+
+        }
+
+        .plan.selected {
+
+            background-color: #10b981;
+
+            color: white;
+
+        }
+
+        .form-group {
+
+            margin-bottom: 16px;
+
+            animation: fadeIn 1s ease-in-out;
+
+        }
+
+        .form-group label {
+
+            display: block;
+
+            color: #374151;
+
+            margin-bottom: 8px;
+
+        }
+
+        .form-group input,
+
+        .form-group select {
+
+            width: 100%;
+
+            padding: 12px;
+
+            border: 1px solid #d1d5db;
+
+            border-radius: 8px;
+
+            transition: border-color 0.3s;
+
+        }
+
+        .form-group input:focus,
+
+        .form-group select:focus {
+
+            border-color: #10b981;
+
+            outline: none;
+
+        }
+
+        .payment-method-buttons {
+
+            display: flex;
+
+            margin-bottom: 16px;
+
+        }
+
+        .payment-method-buttons button {
+
+            width: 50%;
+
+            padding: 12px;
+
+            border: 1px solid #d1d5db;
+
+            background-color: white;
+
+            cursor: pointer;
+
+            transition: background-color 0.3s, transform 0.3s;
+
+        }
+
+        .payment-method-buttons button:first-child {
+
+            border-top-left-radius: 8px;
+
+            border-bottom-left-radius: 8px;
+
+        }
+
+        .payment-method-buttons button:last-child {
+
+            border-top-right-radius: 8px;
+
+            border-bottom-right-radius: 8px;
+
+        }
+
+        .payment-method-buttons button.active {
+
+            background-color: #e5e7eb;
+
+        }
+
+        .payment-method-buttons button:hover {
+
+            background-color: #e5e7eb;
+
+            transform: scale(1.05);
+
+        }
+
+        .subscribe-button {
+
+            width: 100%;
+
+            background-color: #10b981;
+
+            color: white;
+
+            padding: 12px;
+
+            border-radius: 8px;
+
+            cursor: pointer;
+
+            transition: background-color 0.3s;
+
+        }
+
+        .subscribe-button:hover {
+
+            background-color: #059669;
+
+        }
+
+        .hidden {
+
+            display: none;
+
+        }
+
+        .visible {
+
+            display: block;
+
+            animation: fadeIn 0.5s ease-in-out;
+
+        }
+
+        .form-section {
+
+            height: 200px;
+
+            /* Set a fixed height to prevent resizing */
+
+            overflow: hidden;
+
+            position: relative;
+
+        }
+
+        @keyframes fadeIn {
+
+            from {
+
+                opacity: 0;
+
+            }
+
+            to {
+
+                opacity: 1;
+
+            }
+
+        }
+
+        @keyframes slideIn {
+
+            from {
+
+                transform: translateX(-100%);
+
+            }
+
+            to {
+
+                transform: translateX(0);
+
+            }
+
+        }
+
+        @keyframes slideInLeft {
+
+            from {
+
+                transform: translateX(-100%);
+
+            }
+
+            to {
+
+                transform: translateX(0);
+
+            }
+
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container">
+
+        <!-- Left Section -->
+
+        <div class="left-section">
+
+            <div class="header">
+
+                <img src="logo.png" alt="Togethere Logo">
+
+                <div class="title">Event Elevate</div>
+
+            </div>
+
+            <!-- Subscription Plans -->
+
+            <div class="plans-container">
+
+                <div class="plan" onclick="selectPlan(this)">
+
+                    <img src="gold.png" alt="Togethere Basic icon">
+
+                    <div class="plan-details">
+
+                        <div class="plan-title">Elevate Basic</div>
+
+                        <div class="plan-description">Register for events and stay connected with essential features.
+
+                        </div>
+
+                        <div class="plan-quantity">Qty 1 • Billed quarterly</div>
+
+                    </div>
+
+                    <div class="plan-price">₹2000</div>
+
+                </div>
+
+                <div class="plan" onclick="selectPlan(this)">
+
+                    <img src="platinum.png" alt="Togethere Standard icon">
+
+                    <div class="plan-details">
+
+                        <div class="plan-title">Elevate Standard</div>
+
+                        <div class="plan-description">Enjoy higher preference and priority access for smoother event
+
+                            experiences.</div>
+
+                        <div class="plan-quantity">Qty 1 • Billed quarterly</div>
+
+                    </div>
+
+                    <div class="plan-price">₹5000</div>
+
+                </div>
+
+                <div class="plan" onclick="selectPlan(this)">
+
+                    <img src="diamond.png" alt="Togethere Professional icon">
+
+                    <div class="plan-details">
+
+                        <div class="plan-title">Elevate Professional</div>
+
+                        <div class="plan-description">Unlock the best features, top-tier service, and exclusive perks
+
+                            for ultimate event management.</div>
+
+                        <div class="plan-quantity">Qty 1 • Billed quarterly</div>
+
+                    </div>
+
+                    <div class="plan-price">₹10000</div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Right Section -->
+
+        <div class="right-section">
+
+            <form>
+
+                <div class="form-group">
+
+                    <label>Contact information</label>
+
+                    <input type="email" placeholder="email@example.com">
+
+                    <input type="tel" placeholder="+91 1234567890">
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Payment method</label>
+
+                    <div class="payment-method-buttons">
+
+                        <button type="button" id="card-button" class="active" onclick="togglePaymentMethod('card')">
+
+                            <i class="fas fa-credit-card"></i> Card
+
+                        </button>
+
+                        <button type="button" id="upi-button" onclick="togglePaymentMethod('upi')">
+
+                            <i class="fas fa-mobile-alt"></i> UPI
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <div class="form-section">
+
+                    <div id="card-section" class="visible">
+
+                        <div class="form-group">
+
+                            <label>Card information</label>
+
+                            <input type="text" placeholder="1234 1234 1234 1234">
+
+                            <div style="display: flex;">
+
+                                <input type="text" placeholder="MM / YY" style="flex: 1; margin-right: 8px;">
+
+                                <input type="text" placeholder="CVC" style="flex: 1;">
+
+                            </div>
+
+                            <div style="display: flex; align-items: center; margin-top: 8px;">
+
+                                <img src="https://logos-world.net/wp-content/uploads/2020/06/Visa-Logo-2006.png"
+                                    alt="Visa" style="width: 50px; height: 30px; margin-right: 8px;">
+
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Mastercard-logo.svg/2560px-Mastercard-logo.svg.png"
+                                    alt="MasterCard" style="width: 50px; height: 30px; margin-right: 8px;">
+
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/c/cb/Rupay-Logo.png"
+                                    alt="American Express" style="width: 50px; height: 30px; margin-right: 8px;">
+
+                                <img src="https://companieslogo.com/img/orig/BAJFINANCE.NS-1c922000.png?t=1720244490"
+                                    alt="Discover" style="width: 50px; height: 30px;">
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div id="upi-section" class="hidden">
+
+                        <div class="form-group">
+
+                            <label>UPI ID</label>
+
+                            <input type="text" placeholder="your-upi-id@bank">
+
+                        </div>
+
+                        <div style="display: flex; align-items: center; margin-top: 8px;">
+
+                            <img src="https://imgs.search.brave.com/OJKxl1zO3H1C6joHBWmAZA4ajeMCjA6Q3mcWY8PYdNI/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMuaGluZHVzdGFu/dGltZXMuY29tL3Rl/Y2gvaW1nLzIwMjAv/MTEvMDUvOTYweDU0/MC9pbWFnZV8tXzIw/MjAtMTEtMDVUMDk1/NzQwLjA4M18xNjA0/NTUwNDU5MzY1XzE2/MDQ1NTA0NjUyMThf/MTYwNDU1MDU5ODky/OC5qcGc"
+                                alt="Visa" style="width: 50px; height: 30px; margin-right: 8px;">
+
+                            <img src="https://imgs.search.brave.com/eK8SVhhFPn6fC6zWpEZRE-BugXhqrNdG6x5fDMa63tM/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9sb2dv/cy13b3JsZC5uZXQv/d3AtY29udGVudC91/cGxvYWRzLzIwMjAv/MTEvUGF5dG0tTG9n/by0yMDEyLXByZXNl/bnQtNzAweDM5NC5q/cGc"
+                                alt="MasterCard" style="width: 50px; height: 30px; margin-right: 8px;">
+
+                            <img src="https://imgs.search.brave.com/dlbXhiENacGkYQrpDjjBK6oShLRWh-OBwTXS-q2tL90/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMueW91cnN0b3J5/LmNvbS9jcy9pbWFn/ZXMvY29tcGFuaWVz/L2xvZ29zQzIwNTE1/NzU5NzgxMDIwNzFw/bmc_Zm09YXV0byZh/cj0xOjEmbW9kZT1m/aWxsJmZpbGw9c29s/aWQmZmlsbC1jb2xv/cj1mZmYmZm9ybWF0/PWF1dG8mdz0xOTIw/JnE9NzU"
+                                alt="American Express" style="width: 50px; height: 30px; margin-right: 8px;">
+
+                            <img src="https://imgs.search.brave.com/igqFtZBsIyGA_OrFwlkEadJdU5wQDIc-_ZwXEn0SL-U/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLmlt/Z3VyLmNvbS9Sa0VQ/TU16LnBuZw"
+                                alt="Discover" style="width: 50px; height: 30px;">
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>ZIP</label>
+
+                    <input type="text" placeholder="ZIP">
+
+                </div>
+
+                <button type="submit" class="subscribe-button">Subscribe</button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        function togglePaymentMethod(method) {
+
+            const cardSection = document.getElementById('card-section');
+
+            const upiSection = document.getElementById('upi-section');
+
+            const cardButton = document.getElementById('card-button');
+
+            const upiButton = document.getElementById('upi-button');
+
+            if (method === 'card') {
+
+                cardSection.classList.remove('hidden');
+
+                cardSection.classList.add('visible');
+
+                upiSection.classList.remove('visible');
+
+                upiSection.classList.add('hidden');
+
+                cardButton.classList.add('active');
+
+                upiButton.classList.remove('active');
+
+            } else {
+
+                upiSection.classList.remove('hidden');
+
+                upiSection.classList.add('visible');
+
+                cardSection.classList.remove('visible');
+
+                cardSection.classList.add('hidden');
+
+                upiButton.classList.add('active');
+
+                cardButton.classList.remove('active');
+
+            }
+
+        }
+
+        function selectPlan(planElement) {
+
+            const plans = document.querySelectorAll('.plan');
+
+            plans.forEach(plan => {
+
+                plan.classList.remove('selected');
+
+            });
+
+            planElement.classList.add('selected');
+
+        }
+
+    </script>

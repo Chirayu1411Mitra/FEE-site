@@ -43,31 +43,32 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function startCountdown() {
-  const countdowns = document.querySelectorAll('.countdown');
+  const countdownElements = document.querySelectorAll('.countdown');
 
-  countdowns.forEach(countdown => {
-    const eventDate = new Date(countdown.getAttribute('data-event-date')).getTime();
+  countdownElements.forEach(el => {
+      const eventDate = new Date(el.dataset.eventDate).getTime();
 
-    function updateCountdown() {
-      const now = new Date().getTime();
-      const timeLeft = eventDate - now;
+      const updateCountdown = () => {
+          const now = new Date().getTime();
+          const distance = eventDate - now;
 
-      const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+          const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+          const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+          const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-      countdown.innerHTML = `<span>${days}</span> Days <span>${hours}</span> Hours <span>${minutes}</span> Minutes <span>${seconds}</span> Seconds`;
+          if (distance < 0) {
+              el.innerHTML = "Event has passed";
+          } else {
+              el.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+          }
+      };
 
-      if (timeLeft < 0) {
-        countdown.innerHTML = "Event Started!";
-      }
-    }
-
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
   });
 }
+
 
 // Slider Navigation Logic
 let currentSlide = 0;
@@ -93,5 +94,24 @@ document.getElementById('right-arrow').addEventListener('click', () => {
 // Initialize countdown and slider on DOM load
 document.addEventListener('DOMContentLoaded', () => {
   startCountdown();
-  showEventSlide(currentSlide);
+  
+});
+document.addEventListener("DOMContentLoaded", function () {
+  const sections = document.querySelectorAll('.upcoming-events, .about-us, .events-list');
+
+  const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('fade-in-visible');
+        observer.unobserve(entry.target); // Once visible, stop observing
+      }
+    });
+  }, {
+    threshold: 0.1 // Trigger when 10% of the section is visible
+  });
+
+  sections.forEach(section => {
+    section.classList.add('fade-in'); // Initially hide the section
+    observer.observe(section); // Observe each section
+  });
 });
