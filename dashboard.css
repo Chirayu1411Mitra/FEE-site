@@ -11,6 +11,14 @@ body {
     background-color: #f4f6fc;
     overflow: hidden;
 }
+.menu a{
+    text-decoration: none;
+    color: #f4f6fc;
+}
+.btn a{
+    text-decoration: none;
+    color: white;
+    ;}
 
 .container {
     display: flex;
